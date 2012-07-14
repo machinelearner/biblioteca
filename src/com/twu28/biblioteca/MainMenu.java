@@ -36,6 +36,7 @@ public class MainMenu {
     public static void displayAllBooks(ArrayList<Book> Books)
     {
         System.out.println(StarsForDesign+"List of available books"+StarsForDesign);
+        System.out.println("Id :::"+"Book Title :::"+"Availability");
         for (Book item : Books) {
             System.out.println(item.getId() + " ::: " + item.getName()+" ::: "+item.isAvailable);
         }
