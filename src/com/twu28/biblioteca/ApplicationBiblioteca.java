@@ -100,7 +100,9 @@ public class ApplicationBiblioteca {
                     {
                         // do nothing
                     }
-                    System.exit(1);
+                    quit = true;
+                    break;
+                default: System.out.println("Invalid Option");
             }
 
         }
