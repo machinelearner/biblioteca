@@ -1,6 +1,5 @@
 package com.twu28.biblioteca;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +37,7 @@ public class MainMenu {
         System.out.println(StarsForDesign+"List of available books"+StarsForDesign);
         System.out.println("Id :::"+"Book Title :::"+"Availability");
         for (Book item : Books) {
-            System.out.println(item.getId() + " ::: " + item.getName()+" ::: "+item.isAvailable);
+            System.out.println(item.getIsbn() + " ::: " + item.getTitle()+" ::: "+item.isAvailable);
         }
 
     }

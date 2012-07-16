@@ -8,23 +8,23 @@ package com.twu28.biblioteca;
  * To change this template use File | Settings | File Templates.
  */
 public class Book {
-    String name = "";
-    int id ;
+    String title;
+    String isbn;
     public boolean isAvailable;
 
-    Book(String name, int id)
+    Book(String name, String id)
     {
-        this.id = id;
-        this.name = name;
-        this.isAvailable = true;
+        this.isbn = id;
+        this.title = name;
+        this.isAvailable = true;      //Book is available by default when its created for the first time
     }
-    public int getId()
+    public String getIsbn()
     {
-        return this.id;
+        return this.isbn;
     }
-    public String getName()
+    public String getTitle()
     {
-        return this.name;
+        return this.title;
     }
     public boolean reserveCopy()
     {

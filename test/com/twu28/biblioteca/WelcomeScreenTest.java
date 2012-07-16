@@ -15,13 +15,13 @@ import static junit.framework.Assert.assertEquals;
 public class WelcomeScreenTest {
     @Test
     public void bookReserveTrivialTestForNewBook() throws Exception {
-       assertEquals(true, new Book("New Book",9).reserveCopy());
+       assertEquals(true, new Book("New Book","abcd9").reserveCopy());
     }
 
 
     @Test
     public void bookReserveTestForBookAlreadyBorrowed() throws Exception {
-        Book book= new Book("Time pass",12);
+        Book book= new Book("Time pass", "abcd12");
         book.reserveCopy();
         assertEquals(false, book.reserveCopy());
 

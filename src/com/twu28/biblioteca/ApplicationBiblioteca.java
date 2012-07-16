@@ -3,7 +3,6 @@ package com.twu28.biblioteca;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
 import java.util.ArrayList;
 
 /**
@@ -18,31 +17,7 @@ public class ApplicationBiblioteca {
 
     public static void main(String[] args)
     {
-        ArrayList<Book> bookList = new ArrayList<Book>();
-        ArrayList<Customer> userList = new ArrayList<Customer>();
-        ArrayList<MenuOption> menuOptionList = new ArrayList<MenuOption>();
-
-        bookList.add(new Book("Bourne Identity",1));
-        bookList.add(new Book("Bourne Supremacy",2));
-        bookList.add(new Book("Bourne Ultimatum",3));
-        bookList.add(new Book("Bourne Legacy",4));
-        bookList.add(new Book("Bourne Betrayal",5));
-        bookList.add(new Book("Bourne Sanction",6));
-        bookList.add(new Book("Bourne Deception",7));
-        bookList.add(new Book("Bourne Objective",8));
-
-        userList.add(new Customer("Jason Bourne","cia001"));
-        userList.add(new Customer("John Michael Kane","cia002"));
-        userList.add(new Customer("Pamela 1Landy","cia003"));
-        userList.add(new Customer("Ezra Kramer","cia004"));
-        userList.add(new Customer("The Professor","cia005"));
-        userList.add(new Customer("Mari Krutze","ger001"));
-
-        menuOptionList.add(new MenuOption(1,"View All Books"));
-        menuOptionList.add(new MenuOption(2,"Reserve a Book"));
-        menuOptionList.add(new MenuOption(3,"Check your library number"));
-        menuOptionList.add(new MenuOption(4,"Quit"));
-
+        Library libraryInstance = new Library();
         boolean quit = false;
         InputStreamReader inputStream = new InputStreamReader(System.in);
         BufferedReader keyboard = new BufferedReader(inputStream);
@@ -51,7 +26,7 @@ public class ApplicationBiblioteca {
 
         while(!quit)
         {
-            MainMenu.displayMainMenu(menuOptionList);
+            MainMenu.displayMainMenu(libraryInstance.menuOptionList);
             int enteredOption = -1; // default invalid option
             try
             {
@@ -65,16 +40,17 @@ public class ApplicationBiblioteca {
 
             switch (enteredOption)
             {
-                case 1: MainMenu.displayAllBooks(bookList);
+                case 1: MainMenu.displayAllBooks(libraryInstance.bookList);
                     break;
-                case 2: int enteredBookId = 1; //default book to reserve
-                    System.out.println("Enter Book ID of the book to be reserved:");
+
+                case 2: String enteredBookId = "abcd1"; //default book to reserve
+                    System.out.println("Enter Book ISBN of the book to be reserved:");
                     try {
-                        enteredBookId = Integer.parseInt(keyboard.readLine());
+                        enteredBookId = keyboard.readLine();
                     } catch (IOException e) {
-                        System.out.println("Error while reading book id");
+                        System.out.println("Error while reading book isbn");
                     }
-                    if(reserveBook(bookList,enteredBookId))
+                    if(libraryInstance.reserveBook(enteredBookId))
                     {
                         System.out.println("Thank You! Enjoy the book.");
                     }
@@ -83,15 +59,17 @@ public class ApplicationBiblioteca {
                         System.out.println("Sorry we don't have that book yet.");
                     }
                     break;
+
                 case 3: String enteredLibraryNo = "cia001"; // default customer library number
                     System.out.println("Enter Your Library Number:");
                     try {
                         enteredLibraryNo = keyboard.readLine();
-                        MainMenu.displayUserMessage(userList,enteredLibraryNo);
+                        MainMenu.displayUserMessage(libraryInstance.userList,enteredLibraryNo);
                     } catch (IOException e) {
-                        System.out.println("Error while reading book id");
+                        System.out.println("Error while reading book isbn");
                     }
                     break;
+
                 case 4: System.out.println("Thank You for using the service!!");
                     try {
                         Thread.sleep(5000);
@@ -102,7 +80,8 @@ public class ApplicationBiblioteca {
                     }
                     quit = true;
                     break;
-                default: System.out.println("Invalid Option");
+
+                default: System.out.println("Invalid Option\n Select a valid option!");
             }
 
         }
@@ -114,16 +93,4 @@ public class ApplicationBiblioteca {
 
     }
 
-    private static boolean reserveBook(ArrayList<Book> bookList, int bookId) {
-        for(Book item:bookList)
-        {
-            if (item.id == bookId && item.isAvailable)
-            {
-                item.reserveCopy();
-                return true;
-            }
-
-        }
-        return false;
-    }
 }
