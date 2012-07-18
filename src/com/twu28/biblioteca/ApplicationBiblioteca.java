@@ -21,12 +21,13 @@ public class ApplicationBiblioteca {
         boolean quit = false;
         InputStreamReader inputStream = new InputStreamReader(System.in);
         BufferedReader keyboard = new BufferedReader(inputStream);
-
+        MainMenu menuInstance = new MainMenu();
+        Customer currentCustomer = null;
 
 
         while(!quit)
         {
-            MainMenu.displayMainMenu(libraryInstance.menuOptionList);
+            menuInstance.displayMainMenu();
             int enteredOption = -1; // default invalid option
             try
             {
@@ -40,17 +41,17 @@ public class ApplicationBiblioteca {
 
             switch (enteredOption)
             {
-                case 1: MainMenu.displayAllBooks(libraryInstance.bookList);
+                case 1: libraryInstance.manageBooks.displayAllBooks();
                     break;
 
                 case 2: String enteredBookId = "abcd1"; //default book to reserve
-                    System.out.println("Enter Book ISBN of the book to be reserved:");
+                    System.out.println("Enter ISBN of the book to be reserved:");
                     try {
                         enteredBookId = keyboard.readLine();
                     } catch (IOException e) {
                         System.out.println("Error while reading book isbn");
                     }
-                    if(libraryInstance.reserveBook(enteredBookId))
+                    if(libraryInstance.manageBooks.reserveBook(enteredBookId))
                     {
                         System.out.println("Thank You! Enjoy the book.");
                     }
@@ -59,18 +60,45 @@ public class ApplicationBiblioteca {
                         System.out.println("Sorry we don't have that book yet.");
                     }
                     break;
+                case 3:   libraryInstance.getManageMovies().displayAllMovies();
+                    break;
 
-                case 3: String enteredLibraryNo = "cia001"; // default customer library number
-                    System.out.println("Enter Your Library Number:");
+                case 4:
+                    if(currentCustomer != null && currentCustomer.isLoggedIn)
+                    {
+                        System.out.println("Your Library Number Is:");
+                        System.out.println(currentCustomer.getLibraryNumber());
+                    }
+                    else
+                        System.out.println("Please Talk to the Librarian");
+                    break;
+
+                case 5:
+                    String username=null,password=null;
+                    System.out.println("Enter Your Username");
                     try {
-                        enteredLibraryNo = keyboard.readLine();
-                        MainMenu.displayUserMessage(libraryInstance.userList,enteredLibraryNo);
+                        username = keyboard.readLine();
+                        } catch (IOException e) {
+                        System.out.println("Error while reading username");
+                    }
+                    System.out.println("Enter Your password");
+                    try {
+                        password = keyboard.readLine();
                     } catch (IOException e) {
-                        System.out.println("Error while reading book isbn");
+                        System.out.println("Error while reading password");
+                    }
+                    Customer searchedUser = libraryInstance.manageCustomers.loginCheck(username,password);
+                    if(searchedUser !=null) {
+                        System.out.println("Login Successful");
+                        currentCustomer = searchedUser;
+                    }
+                    else {
+                        System.out.println("Invalid Username or password");
                     }
                     break;
 
-                case 4: System.out.println("Thank You for using the service!!");
+
+                case 6: System.out.println("Thank You for using the service!!");
                     try {
                         Thread.sleep(5000);
                     }

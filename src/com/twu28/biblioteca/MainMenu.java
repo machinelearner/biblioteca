@@ -14,9 +14,26 @@ public class MainMenu {
     public static final String WelcomeMessage = "Welcome To Biblioteca";
     public static final String DescriptionMessage = "Bangalore's Public Library System";
     public static final String StarsForDesign = "**************************";
+    ArrayList<MenuOption> menuOptionList;
+
+    MainMenu()
+    {
+        this.menuOptionList = new ArrayList<MenuOption>();
+        this.createMenuOptionList();
+    }
+
+    public void createMenuOptionList()
+    {
+        this.menuOptionList.add(new MenuOption(1,"View All Books"));
+        this.menuOptionList.add(new MenuOption(2,"Reserve a Book"));
+        this.menuOptionList.add(new MenuOption(3,"View All Movies"));
+        this.menuOptionList.add(new MenuOption(4,"Check your library number"));
+        this.menuOptionList.add(new MenuOption(5,"Log In"));
+        this.menuOptionList.add(new MenuOption(6,"Quit"));
+    }
 
 
-    public static void displayMainMenu(ArrayList<MenuOption> MenuOptions)
+    public void displayMainMenu()
     {
         System.out.println(StarsForDesign+WelcomeMessage+StarsForDesign);
         System.out.println("\n");
@@ -26,36 +43,10 @@ public class MainMenu {
         System.out.println("Select an option from the menu below");
         System.out.println(StarsForDesign+"Menu"+StarsForDesign);
         System.out.println("===============================================================================");
-        for (MenuOption item : MenuOptions) {
+        for (MenuOption item : this.menuOptionList) {
             System.out.println(item.getOptionId() + "::: " + item.getOptionValue());
         }
         System.out.print("Enter Your Option:: ");
     }
 
-    public static void displayAllBooks(ArrayList<Book> Books)
-    {
-        System.out.println(StarsForDesign+"List of available books"+StarsForDesign);
-        System.out.println("Id :::"+"Book Title :::"+"Availability");
-        for (Book item : Books) {
-            System.out.println(item.getIsbn() + " ::: " + item.getTitle()+" ::: "+item.isAvailable);
-        }
-
-    }
-
-    //part of menu handling and display and is not associated with any object in particular
-    public static void displayUserMessage(ArrayList<Customer> users,String libraryNo )
-    {
-        for( Customer item:users)
-        {
-            if(item.libraryNumber.equals(libraryNo))
-            {
-                System.out.println("Please talk to Librarian. Thank you.");
-                return;
-            }
-        }
-        System.out.println("Invalid Library Number");
-        return;
-
-
-    }
 }

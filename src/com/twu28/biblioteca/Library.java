@@ -10,62 +10,64 @@ import java.util.ArrayList;
  * To change this template use File | Settings | File Templates.
  */
 public class Library {
-    ArrayList<Book> bookList;
-    ArrayList<Customer> userList;
-    ArrayList<MenuOption> menuOptionList;
+
+    CustomerOperations manageCustomers;
+    BookOperations manageBooks ;
+    MainMenu manageMenu;
+    MovieOperations manageMovies;
+    public static  final String LibraryNumberSeriesInitial;
+
+    static {
+        LibraryNumberSeriesInitial = "111-1111";
+    }
 
     Library()
     {
-        this.userList = new ArrayList<Customer>();
-        this.bookList = new ArrayList<Book>();
-        this.menuOptionList = new ArrayList<MenuOption>();
-        this.createBookList();
-        this.createUserList();
-        this.createMenuOptionList();
-    }
-    public void createBookList()
-    {
-        this.bookList.add(new Book("Bourne Identity", "abcd1"));
-        this.bookList.add(new Book("Bourne Supremacy", "abcd2"));
-        this.bookList.add(new Book("Bourne Ultimatum", "abcd3"));
-        this.bookList.add(new Book("Bourne Legacy","abcd4"));
-        this.bookList.add(new Book("Bourne Betrayal", "abcd5"));
-        this.bookList.add(new Book("Bourne Sanction", "abcd6"));
-        this.bookList.add(new Book("Bourne Deception", "abcd7"));
-        this.bookList.add(new Book("Bourne Objective", "abcd8"));
-
+       this.manageBooks = new BookOperations();
+       this.manageCustomers = new CustomerOperations();
+       this.manageMenu = new MainMenu();
+       this.manageMovies = new MovieOperations();
     }
 
-    public void createUserList()
-    {
-        this.userList.add(new Customer("Jason Bourne","cia001"));
-        this.userList.add(new Customer("John Michael Kane","cia002"));
-        this.userList.add(new Customer("Pamela Landy","cia003"));
-        this.userList.add(new Customer("Ezra Kramer","cia004"));
-        this.userList.add(new Customer("The Professor","cia005"));
-        this.userList.add(new Customer("Mari Kruetze","ger001"));
-    }
+    public static String generateNewLibraryNumber(int count) {
 
-    public void createMenuOptionList()
-    {
-        this.menuOptionList.add(new MenuOption(1,"View All Books"));
-        this.menuOptionList.add(new MenuOption(2,"Reserve a Book"));
-        this.menuOptionList.add(new MenuOption(3,"Check your library number"));
-        this.menuOptionList.add(new MenuOption(4,"Quit"));
-    }
+        if(count==0)
+            return "111-1111";
 
-    public boolean reserveBook(String bookId) {
-        for(Book item:this.bookList)
+        if(count==1)
+            return "111-1112";
+
+        int firstHalfOfLibraryNumber, secondHalfOfLibraryNumber;
+        firstHalfOfLibraryNumber = Integer.parseInt(LibraryNumberSeriesInitial.split("-")[0]);
+        secondHalfOfLibraryNumber = Integer.parseInt(LibraryNumberSeriesInitial.split("-")[1]);
+        int remainder = count % 8890;
+        int quotient = count/8890;
+        secondHalfOfLibraryNumber += remainder;
+        if(secondHalfOfLibraryNumber > 9999)
         {
-            if (item.isbn.equals(bookId) && item.isAvailable)
-            {
-                item.reserveCopy();
-                return true;
-            }
-
+            // start over with 1111 in the second half and increment the first half
+            secondHalfOfLibraryNumber = 1111;
+            firstHalfOfLibraryNumber +=(quotient+1) ;
         }
-        return false;
+
+        return firstHalfOfLibraryNumber+"-"+ secondHalfOfLibraryNumber;
+
     }
 
+    public MovieOperations getManageMovies() {
+        return manageMovies;
+    }
+
+    public MainMenu getManageMenu() {
+        return manageMenu;
+    }
+
+    public BookOperations getManageBooks() {
+        return manageBooks;
+    }
+
+    public CustomerOperations getManageCustomers() {
+        return manageCustomers;
+    }
 
 }

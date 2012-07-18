@@ -8,22 +8,20 @@ package com.twu28.biblioteca;
  * To change this template use File | Settings | File Templates.
  */
 public class Customer {
-    /*
-    * Was not really asked for;
-    * Did not understand the check library card's functionality completely;
-    * hence i implemented it by profiling method
-    * also this is an invalid comment(sorry for that)
-    */
-
-    public static int autoGenId = 0;
-    String customerName = "";
+    public static Customer librarian = null;
+    public static int autoGenId = 1;
+    String Name = "";
+    String password;
     int customerId;
-    String libraryNumber = "";
+    public boolean isLoggedIn = false;
+    boolean isLibrarian = false;
+    String libraryNumber;
 
-    Customer(String name , String libraryNo)
+    Customer(String name, String password )
     {
-        this.customerName = name;
-        this.libraryNumber = libraryNo;
+        this.Name = name;
+        this.libraryNumber = Library.generateNewLibraryNumber(autoGenId);
+        this.password = password;
         autoGenId +=1;
         this.customerId = autoGenId;
     }
@@ -33,9 +31,14 @@ public class Customer {
         return this.customerId;
     }
 
-    public String getCustomerName()
+    public String getPassword()
     {
-        return this.customerName;
+        return this.password;
+    }
+
+    public String getName()
+    {
+        return this.Name;
     }
 
     public String getLibraryNumber()
