@@ -19,8 +19,6 @@ public class ApplicationBiblioteca {
     {
         Library libraryInstance = new Library();
         boolean quit = false;
-        InputStreamReader inputStream = new InputStreamReader(System.in);
-        BufferedReader keyboard = new BufferedReader(inputStream);
         MainMenu menuInstance = new MainMenu();
         Customer currentCustomer = null;
 
@@ -31,7 +29,7 @@ public class ApplicationBiblioteca {
             int enteredOption = -1; // default invalid option
             try
             {
-                enteredOption = Integer.parseInt(keyboard.readLine());
+                enteredOption = Integer.parseInt(InputHandler.getMessage());
 
             }
             catch (Exception e)
@@ -49,11 +47,7 @@ public class ApplicationBiblioteca {
                     {
                         String enteredBookId = "abcd1"; //default book to reserve
                         OutputHandler.displayMessage("Enter ISBN of the book to be reserved:");
-                        try {
-                            enteredBookId = keyboard.readLine();
-                        } catch (IOException e) {
-                            OutputHandler.displayMessage("Error while reading book isbn");
-                        }
+                        enteredBookId = InputHandler.getMessage();
                         if(libraryInstance.manageBooks.reserveBook(enteredBookId))
                         {
                             OutputHandler.displayMessage("Thank You! Enjoy the book.");
@@ -66,6 +60,7 @@ public class ApplicationBiblioteca {
                     }
                     else  OutputHandler.displayMessage("You need to log in to use this facility");
                     break;
+
                 case 3:   libraryInstance.getManageMovies().displayAllMovies();
                     break;
 
@@ -82,17 +77,9 @@ public class ApplicationBiblioteca {
                 case 5:
                     String username=null,password=null;
                     OutputHandler.displayMessage("Enter Your Username");
-                    try {
-                        username = keyboard.readLine();
-                    } catch (IOException e) {
-                        OutputHandler.displayMessage("Error while reading username");
-                    }
+                    username = InputHandler.getMessage();
                     OutputHandler.displayMessage("Enter Your password");
-                    try {
-                        password = keyboard.readLine();
-                    } catch (IOException e) {
-                        OutputHandler.displayMessage("Error while reading password");
-                    }
+                    password = InputHandler.getMessage();
                     Customer searchedUser = libraryInstance.manageCustomers.loginCheck(username,password);
                     if(searchedUser !=null) {
                         OutputHandler.displayMessage("Login Successful");
@@ -103,14 +90,12 @@ public class ApplicationBiblioteca {
                     }
                     break;
 
-
                 case 6: OutputHandler.displayMessage("Thank You for using the service!!");
                     try {
                         Thread.sleep(5000);
                     }
                     catch (InterruptedException ex)
                     {
-                        // do nothing
                     }
                     quit = true;
                     break;
