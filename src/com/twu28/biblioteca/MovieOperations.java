@@ -41,7 +41,8 @@ public class MovieOperations {
 
         for(Movie item:movieList)
         {
-            System.out.println(item);
+            OutputHandler.displayMessage(item.toString());
         }
+
     }
 }

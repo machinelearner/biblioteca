@@ -36,7 +36,7 @@ public class ApplicationBiblioteca {
             }
             catch (Exception e)
             {
-                System.out.println("Please enter a valid Option!!");
+                OutputHandler.displayMessage("Please enter a valid Option!!");
             }
 
             switch (enteredOption)
@@ -44,21 +44,27 @@ public class ApplicationBiblioteca {
                 case 1: libraryInstance.manageBooks.displayAllBooks();
                     break;
 
-                case 2: String enteredBookId = "abcd1"; //default book to reserve
-                    System.out.println("Enter ISBN of the book to be reserved:");
-                    try {
-                        enteredBookId = keyboard.readLine();
-                    } catch (IOException e) {
-                        System.out.println("Error while reading book isbn");
-                    }
-                    if(libraryInstance.manageBooks.reserveBook(enteredBookId))
+                case 2:
+                    if(currentCustomer != null && currentCustomer.isLoggedIn)
                     {
-                        System.out.println("Thank You! Enjoy the book.");
+                        String enteredBookId = "abcd1"; //default book to reserve
+                        OutputHandler.displayMessage("Enter ISBN of the book to be reserved:");
+                        try {
+                            enteredBookId = keyboard.readLine();
+                        } catch (IOException e) {
+                            OutputHandler.displayMessage("Error while reading book isbn");
+                        }
+                        if(libraryInstance.manageBooks.reserveBook(enteredBookId))
+                        {
+                            OutputHandler.displayMessage("Thank You! Enjoy the book.");
+                        }
+                        else
+                        {
+                            OutputHandler.displayMessage("Sorry we don't have that book yet.");
+                        }
+
                     }
-                    else
-                    {
-                        System.out.println("Sorry we don't have that book yet.");
-                    }
+                    else  OutputHandler.displayMessage("You need to log in to use this facility");
                     break;
                 case 3:   libraryInstance.getManageMovies().displayAllMovies();
                     break;
@@ -66,39 +72,39 @@ public class ApplicationBiblioteca {
                 case 4:
                     if(currentCustomer != null && currentCustomer.isLoggedIn)
                     {
-                        System.out.println("Your Library Number Is:");
-                        System.out.println(currentCustomer.getLibraryNumber());
+                        OutputHandler.displayMessage("Your Library Number Is:");
+                        OutputHandler.displayMessage(currentCustomer.getLibraryNumber());
                     }
                     else
-                        System.out.println("Please Talk to the Librarian");
+                        OutputHandler.displayMessage("Please Talk to the Librarian");
                     break;
 
                 case 5:
                     String username=null,password=null;
-                    System.out.println("Enter Your Username");
+                    OutputHandler.displayMessage("Enter Your Username");
                     try {
                         username = keyboard.readLine();
-                        } catch (IOException e) {
-                        System.out.println("Error while reading username");
+                    } catch (IOException e) {
+                        OutputHandler.displayMessage("Error while reading username");
                     }
-                    System.out.println("Enter Your password");
+                    OutputHandler.displayMessage("Enter Your password");
                     try {
                         password = keyboard.readLine();
                     } catch (IOException e) {
-                        System.out.println("Error while reading password");
+                        OutputHandler.displayMessage("Error while reading password");
                     }
                     Customer searchedUser = libraryInstance.manageCustomers.loginCheck(username,password);
                     if(searchedUser !=null) {
-                        System.out.println("Login Successful");
+                        OutputHandler.displayMessage("Login Successful");
                         currentCustomer = searchedUser;
                     }
                     else {
-                        System.out.println("Invalid Username or password");
+                        OutputHandler.displayMessage("Invalid Username or password");
                     }
                     break;
 
 
-                case 6: System.out.println("Thank You for using the service!!");
+                case 6: OutputHandler.displayMessage("Thank You for using the service!!");
                     try {
                         Thread.sleep(5000);
                     }
@@ -109,7 +115,7 @@ public class ApplicationBiblioteca {
                     quit = true;
                     break;
 
-                default: System.out.println("Invalid Option\n Select a valid option!");
+                default: OutputHandler.displayMessage("Invalid Option\n Select a valid option!");
             }
 
         }

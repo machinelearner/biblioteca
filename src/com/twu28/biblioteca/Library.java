@@ -54,20 +54,8 @@ public class Library {
 
     }
 
+
     public MovieOperations getManageMovies() {
         return manageMovies;
     }
-
-    public MainMenu getManageMenu() {
-        return manageMenu;
-    }
-
-    public BookOperations getManageBooks() {
-        return manageBooks;
-    }
-
-    public CustomerOperations getManageCustomers() {
-        return manageCustomers;
-    }
-
 }

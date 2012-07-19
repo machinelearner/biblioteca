@@ -35,18 +35,18 @@ public class MainMenu {
 
     public void displayMainMenu()
     {
-        System.out.println(StarsForDesign+WelcomeMessage+StarsForDesign);
-        System.out.println("\n");
-        System.out.println(DescriptionMessage);
-        System.out.println("\n");
-        System.out.println(StarsForDesign+StarsForDesign+StarsForDesign);
-        System.out.println("Select an option from the menu below");
-        System.out.println(StarsForDesign+"Menu"+StarsForDesign);
-        System.out.println("===============================================================================");
+        OutputHandler.displayMessage(StarsForDesign+WelcomeMessage+StarsForDesign);
+        OutputHandler.displayMessage("\n");
+        OutputHandler.displayMessage(DescriptionMessage);
+        OutputHandler.displayMessage("\n");
+        OutputHandler.displayMessage(StarsForDesign+StarsForDesign+StarsForDesign);
+        OutputHandler.displayMessage("Select an option from the menu below");
+        OutputHandler.displayMessage(StarsForDesign+"Menu"+StarsForDesign);
+        OutputHandler.displayMessage("===============================================================================");
         for (MenuOption item : this.menuOptionList) {
-            System.out.println(item.getOptionId() + "::: " + item.getOptionValue());
+            OutputHandler.displayMessage(item.getOptionId() + "::: " + item.getOptionValue());
         }
-        System.out.print("Enter Your Option:: ");
+        OutputHandler.displayMessage("Enter Your Option:: \b");
     }
 
 }

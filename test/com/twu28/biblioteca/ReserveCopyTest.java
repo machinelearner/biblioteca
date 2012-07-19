@@ -12,7 +12,7 @@ import static junit.framework.Assert.assertEquals;
  * To change this template use File | Settings | File Templates.
  */
 
-public class WelcomeScreenTest {
+public class ReserveCopyTest {
     @Test
     public void bookReserveTrivialTestForNewBook() throws Exception {
        assertEquals(true, new Book("New Book","abcd9").reserveCopy());
