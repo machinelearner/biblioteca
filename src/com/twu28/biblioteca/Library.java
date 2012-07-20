@@ -58,4 +58,8 @@ public class Library {
     public MovieOperations getManageMovies() {
         return manageMovies;
     }
+    public BookOperations getManageBooks() {
+        return manageBooks;
+    }
+
 }

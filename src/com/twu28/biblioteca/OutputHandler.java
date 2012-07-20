@@ -21,4 +21,9 @@ public class OutputHandler {
             System.out.println(message);
         }
     }
+    public static void displayErrorMessage(String message)
+    {
+        System.out.println("Error!!");
+        System.out.println(message);
+    }
 }

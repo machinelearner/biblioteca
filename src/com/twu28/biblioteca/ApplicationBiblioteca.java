@@ -34,12 +34,12 @@ public class ApplicationBiblioteca {
             }
             catch (Exception e)
             {
-                OutputHandler.displayMessage("Please enter a valid Option!!");
+                OutputHandler.displayErrorMessage("Error Reading Input");
             }
 
             switch (enteredOption)
             {
-                case 1: libraryInstance.manageBooks.displayAllBooks();
+                case 1: libraryInstance.getManageBooks().displayAllBooks();
                     break;
 
                 case 2:
@@ -48,7 +48,7 @@ public class ApplicationBiblioteca {
                         String enteredBookId = "abcd1"; //default book to reserve
                         OutputHandler.displayMessage("Enter ISBN of the book to be reserved:");
                         enteredBookId = InputHandler.getMessage();
-                        if(libraryInstance.manageBooks.reserveBook(enteredBookId))
+                        if(libraryInstance.getManageBooks().reserveBook(enteredBookId))
                         {
                             OutputHandler.displayMessage("Thank You! Enjoy the book.");
                         }
@@ -58,7 +58,8 @@ public class ApplicationBiblioteca {
                         }
 
                     }
-                    else  OutputHandler.displayMessage("You need to log in to use this facility");
+                    else
+                        OutputHandler.displayMessage("You need to log in to use this facility");
                     break;
 
                 case 3:   libraryInstance.getManageMovies().displayAllMovies();

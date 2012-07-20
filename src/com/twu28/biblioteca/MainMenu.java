@@ -46,7 +46,7 @@ public class MainMenu {
         for (MenuOption item : this.menuOptionList) {
             OutputHandler.displayMessage(item.getOptionId() + "::: " + item.getOptionValue());
         }
-        OutputHandler.displayMessage("Enter Your Option:: \b");
+        OutputHandler.displayMessage("Enter Your Option:: ");
     }
 
 }
