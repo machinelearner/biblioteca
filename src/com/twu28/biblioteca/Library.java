@@ -61,14 +61,14 @@ public class Library {
     //book list and related functions
     public void createBookList()
     {
-        this.bookList.add(new Book("Bourne Identity", "abcd1","Robert Ludlum"));
-        this.bookList.add(new Book("Bourne Supremacy", "abcd2","Robert Ludlum"));
-        this.bookList.add(new Book("Bourne Ultimatum", "abcd3","Robert Ludlum"));
-        this.bookList.add(new Book("Bourne Legacy","abcd4","Eric Van Lustbader"));
-        this.bookList.add(new Book("Bourne Betrayal", "abcd5","Eric Van Lustbader"));
-        this.bookList.add(new Book("Bourne Sanction", "abcd6","Eric Van Lustbader"));
-        this.bookList.add(new Book("Bourne Deception", "abcd7","Eric Van Lustbader"));
-        this.bookList.add(new Book("Bourne Objective", "abcd8","Eric Van Lustbader"));
+        this.bookList.add(new Book("Bourne Identity", "abcd1",new Author("Robert", "Ludlum")));
+        this.bookList.add(new Book("Bourne Supremacy", "abcd2",new Author("Robert", "Ludlum")));
+        this.bookList.add(new Book("Bourne Ultimatum", "abcd3",new Author("Robert", "Ludlum")));
+        this.bookList.add(new Book("Bourne Legacy","abcd4",new Author("Eric","Lustbader")));
+        this.bookList.add(new Book("Bourne Betrayal", "abcd5",new Author("Eric","Lustbader")));
+        this.bookList.add(new Book("Bourne Sanction", "abcd6",new Author("Eric","Lustbader")));
+        this.bookList.add(new Book("Bourne Deception", "abcd7",new Author("Eric","Lustbader")));
+        this.bookList.add(new Book("Bourne Objective", "abcd8",new Author("Eric","Lustbader")));
 
     }
 
@@ -86,10 +86,10 @@ public class Library {
     }
     public void displayAllBooks()
     {
-        System.out.println(MainMenu.StarsForDesign+"List of available books"+MainMenu.StarsForDesign);
-        System.out.println("Id :::"+"Book Title :::"+"Availability");
+        OutputHandler.displayMessage(MainMenu.StarsForDesign+"List of available books"+MainMenu.StarsForDesign);
+        OutputHandler.displayMessage("Id :::"+"Book Title :::"+"Availability");
         for (Book item : this.bookList) {
-            System.out.println(item.getIsbn() + " ::: " + item.getTitle()+" ::: "+item.isAvailable);
+            OutputHandler.displayMessage(item.getIsbn() + " ::: " + item.getTitle()+" ::: "+item.isAvailable);
         }
 
     }

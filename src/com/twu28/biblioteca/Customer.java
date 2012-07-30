@@ -26,19 +26,9 @@ public class Customer {
         this.customerId = autoGenId;
     }
 
-    public int getCustomerId()
-    {
-        return this.customerId;
-    }
-
     public String getPassword()
     {
         return this.password;
-    }
-
-    public String getName()
-    {
-        return this.Name;
     }
 
     public String getLibraryNumber()

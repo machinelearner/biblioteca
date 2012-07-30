@@ -9,20 +9,20 @@ package com.twu28.biblioteca;
  */
 public class Book {
     String title;
-    String isbn;
-    String author;
+    ISBN isbn;
+    Author author;
     public boolean isAvailable;
 
-    Book(String name, String id, String author)
+    Book(String name, String id, Author author)
     {
-        this.isbn = id;
+        this.isbn = new ISBN(id);
         this.title = name;
         this.author = author;
         this.isAvailable = true;      //Book is available by default when its created for the first time
     }
     public String getIsbn()
     {
-        return this.isbn;
+        return this.isbn.toString();
     }
     public String getTitle()
     {
@@ -35,5 +35,10 @@ public class Book {
             return true;
         }
         return  this.isAvailable;
+    }
+
+    @Override
+    public String toString() {
+        return title+" "+isbn+" "+author+" "+isAvailable;
     }
 }

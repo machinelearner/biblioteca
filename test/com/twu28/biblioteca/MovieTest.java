@@ -11,7 +11,7 @@ import static junit.framework.Assert.assertEquals;
  * Time: 7:50 PM
  * To change this template use File | Settings | File Templates.
  */
-public class MovieListTest {
+public class MovieTest {
     @Test
     public void movieWithRatingTest() throws Exception {
         assertEquals("A Few Good Men Rob Reiner ********",new Movie("A Few Good Men", "Rob Reiner","********").toString());

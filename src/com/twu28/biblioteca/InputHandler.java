@@ -29,4 +29,18 @@ public class InputHandler {
         }
         return null;
     }
+    public static int getValue()
+    {
+        try
+        {
+            return Integer.parseInt(keyboard.readLine());
+
+        }
+        catch (Exception e)
+        {
+            OutputHandler.displayMessage("Error while reading Input");
+
+        }
+        return -1;
+    }
 }

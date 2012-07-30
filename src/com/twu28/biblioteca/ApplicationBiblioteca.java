@@ -27,15 +27,7 @@ public class ApplicationBiblioteca {
         {
             menuInstance.displayMainMenu();
             int enteredOption = -1; // default invalid option
-            try
-            {
-                enteredOption = Integer.parseInt(InputHandler.getMessage());
-
-            }
-            catch (Exception e)
-            {
-                OutputHandler.displayErrorMessage("Error Reading Input");
-            }
+            enteredOption = InputHandler.getValue();
 
             switch (enteredOption)
             {
@@ -87,7 +79,7 @@ public class ApplicationBiblioteca {
                         currentCustomer = searchedUser;
                     }
                     else {
-                        OutputHandler.displayMessage("Invalid Username or password");
+                        OutputHandler.displayErrorMessage("Invalid Username or password");
                     }
                     break;
 
@@ -101,7 +93,7 @@ public class ApplicationBiblioteca {
                     quit = true;
                     break;
 
-                default: OutputHandler.displayMessage("Invalid Option\n Select a valid option!");
+                default: OutputHandler.displayErrorMessage("Invalid Option\n Select a valid option!");
             }
 
         }
