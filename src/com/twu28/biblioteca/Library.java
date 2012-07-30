@@ -7,14 +7,15 @@ import java.util.ArrayList;
  * User: pramod
  * Date: 16/7/12
  * Time: 9:01 AM
- * To change this template use File | Settings | File Templates.
+ * The library class has repositories of all the books,
  */
 public class Library {
 
-    CustomerOperations manageCustomers;
-    BookOperations manageBooks ;
+    ArrayList<Book> bookList;
+    ArrayList<Customer> userList;
+    ArrayList<Movie> movieList;
     MainMenu manageMenu;
-    MovieOperations manageMovies;
+
     public static  final String LibraryNumberSeriesInitial;
 
     static {
@@ -23,10 +24,13 @@ public class Library {
 
     Library()
     {
-       this.manageBooks = new BookOperations();
-       this.manageCustomers = new CustomerOperations();
-       this.manageMenu = new MainMenu();
-       this.manageMovies = new MovieOperations();
+       bookList = new ArrayList<Book>();
+       userList = new ArrayList<Customer>();
+       movieList = new ArrayList<Movie>();
+        createBookList();
+        createMoviesList();
+        createUserList();
+
     }
 
     public static String generateNewLibraryNumber(int count) {
@@ -38,10 +42,10 @@ public class Library {
             return "111-1112";
 
         int firstHalfOfLibraryNumber, secondHalfOfLibraryNumber;
-        firstHalfOfLibraryNumber = Integer.parseInt(LibraryNumberSeriesInitial.split("-")[0]);
-        secondHalfOfLibraryNumber = Integer.parseInt(LibraryNumberSeriesInitial.split("-")[1]);
         int remainder = count % 8890;
         int quotient = count/8890;
+        firstHalfOfLibraryNumber = Integer.parseInt(LibraryNumberSeriesInitial.split("-")[0]);
+        secondHalfOfLibraryNumber = Integer.parseInt(LibraryNumberSeriesInitial.split("-")[1]);
         secondHalfOfLibraryNumber += remainder;
         if(secondHalfOfLibraryNumber > 9999)
         {
@@ -54,12 +58,125 @@ public class Library {
 
     }
 
+    //book list and related functions
+    public void createBookList()
+    {
+        this.bookList.add(new Book("Bourne Identity", "abcd1"));
+        this.bookList.add(new Book("Bourne Supremacy", "abcd2"));
+        this.bookList.add(new Book("Bourne Ultimatum", "abcd3"));
+        this.bookList.add(new Book("Bourne Legacy","abcd4"));
+        this.bookList.add(new Book("Bourne Betrayal", "abcd5"));
+        this.bookList.add(new Book("Bourne Sanction", "abcd6"));
+        this.bookList.add(new Book("Bourne Deception", "abcd7"));
+        this.bookList.add(new Book("Bourne Objective", "abcd8"));
 
-    public MovieOperations getManageMovies() {
-        return manageMovies;
     }
-    public BookOperations getManageBooks() {
-        return manageBooks;
+
+    public boolean reserveBook(String isbn) {
+        for(Book item:this.bookList)
+        {
+            if (item.isbn.equals(isbn) && item.isAvailable)
+            {
+                item.reserveCopy();
+                return true;
+            }
+
+        }
+        return false;
     }
+    public void displayAllBooks()
+    {
+        System.out.println(MainMenu.StarsForDesign+"List of available books"+MainMenu.StarsForDesign);
+        System.out.println("Id :::"+"Book Title :::"+"Availability");
+        for (Book item : this.bookList) {
+            System.out.println(item.getIsbn() + " ::: " + item.getTitle()+" ::: "+item.isAvailable);
+        }
+
+    }
+
+    //userlist and related functions
+    public void createUserList()
+    {
+        this.userList.add(new Customer("Jason Bourne","admin"));
+        this.userList.add(new Customer("John Michael Kane","admin"));
+        this.userList.add(new Customer("Pamela Landy","admin"));
+        this.userList.add(new Customer("Ezra Kramer","admin"));
+        this.userList.add(new Customer("The Professor","admin"));
+        this.userList.add(new Customer("Mari Kruetze","admin"));
+    }
+
+    public void makeLibrarian(Customer user)
+    {
+        user.isLibrarian = true;
+
+        if(Customer.librarian == null)
+        {
+            Customer.librarian = user;
+        }
+        else
+        {    //change the previous librarian to non librarian and assign current librarian's library number to previous
+            Customer.librarian.isLibrarian = false;
+            Customer.librarian.libraryNumber = user.libraryNumber;
+        }
+        user.libraryNumber = new String("111-1111");
+
+    }
+
+    public Customer loginCheck(String username, String password)
+    {
+        Customer searched = searchUserList(username);
+        if(searched != null)
+        {
+            if(searched.getPassword().equals(password))
+            {
+                searched.isLoggedIn = true;
+                return searched;
+            }
+        }
+        return null;
+    }
+
+    private Customer searchUserList(String username) {
+        for(Customer item:this.userList)
+        {
+            if(item.getLibraryNumber().equals(username))
+                return item;
+        }
+
+        return null;
+    }
+
+    //movielist and related functions
+
+    private void createMoviesList()
+    {
+        this.movieList.add(new Movie("The Prestige","Christopher Nolan","*********"));
+        this.movieList.add(new Movie("Batman Begins","Christopher Nolan","*********"));
+        this.movieList.add(new Movie("The Dark Knight","Christopher Nolan","*********"));
+        this.movieList.add(new Movie("Inception","Christopher Nolan","********"));
+        this.movieList.add(new Movie("Oceans 11","Steven Soderbergh","*********"));
+        this.movieList.add(new Movie("Oceans 12","Steven Soderbergh","*********"));
+        this.movieList.add(new Movie("Oceans 13","Steven Soderbergh","*********"));
+        this.movieList.add(new Movie("Bourne Identity","Doug Liman","*********"));
+        this.movieList.add(new Movie("Bourne Supremacy","Paul Greengrass","********"));
+        this.movieList.add(new Movie("Bourne Ultimatum","Paul Greengrass","*********"));
+        this.movieList.add(new Movie("The God Father","Francis Ford Coppola","*********"));
+        this.movieList.add(new Movie("Good Will Hunting","Gus Van Sant","*********"));
+        this.movieList.add(new Movie("Body of lies","Ridley Scott","********"));
+        this.movieList.add(new Movie("Shawshank Redemption","Frank Darabont","*********"));
+        this.movieList.add(new Movie("Disturbia","D.J. Caruso","*******"));
+        this.movieList.add(new Movie("Dark Knight Rises","Christopher Nolan","N/A"));
+    }
+
+
+    public void displayAllMovies() {
+
+        for(Movie item:movieList)
+        {
+            OutputHandler.displayMessage(item.toString());
+        }
+
+    }
+
 
 }

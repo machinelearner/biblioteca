@@ -39,7 +39,7 @@ public class ApplicationBiblioteca {
 
             switch (enteredOption)
             {
-                case 1: libraryInstance.getManageBooks().displayAllBooks();
+                case 1: libraryInstance.displayAllBooks();
                     break;
 
                 case 2:
@@ -48,7 +48,7 @@ public class ApplicationBiblioteca {
                         String enteredBookId = "abcd1"; //default book to reserve
                         OutputHandler.displayMessage("Enter ISBN of the book to be reserved:");
                         enteredBookId = InputHandler.getMessage();
-                        if(libraryInstance.getManageBooks().reserveBook(enteredBookId))
+                        if(libraryInstance.reserveBook(enteredBookId))
                         {
                             OutputHandler.displayMessage("Thank You! Enjoy the book.");
                         }
@@ -62,7 +62,7 @@ public class ApplicationBiblioteca {
                         OutputHandler.displayMessage("You need to log in to use this facility");
                     break;
 
-                case 3:   libraryInstance.getManageMovies().displayAllMovies();
+                case 3:   libraryInstance.displayAllMovies();
                     break;
 
                 case 4:
@@ -81,7 +81,7 @@ public class ApplicationBiblioteca {
                     username = InputHandler.getMessage();
                     OutputHandler.displayMessage("Enter Your password");
                     password = InputHandler.getMessage();
-                    Customer searchedUser = libraryInstance.manageCustomers.loginCheck(username,password);
+                    Customer searchedUser = libraryInstance.loginCheck(username,password);
                     if(searchedUser !=null) {
                         OutputHandler.displayMessage("Login Successful");
                         currentCustomer = searchedUser;
