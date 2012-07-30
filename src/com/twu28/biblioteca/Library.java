@@ -61,14 +61,14 @@ public class Library {
     //book list and related functions
     public void createBookList()
     {
-        this.bookList.add(new Book("Bourne Identity", "abcd1"));
-        this.bookList.add(new Book("Bourne Supremacy", "abcd2"));
-        this.bookList.add(new Book("Bourne Ultimatum", "abcd3"));
-        this.bookList.add(new Book("Bourne Legacy","abcd4"));
-        this.bookList.add(new Book("Bourne Betrayal", "abcd5"));
-        this.bookList.add(new Book("Bourne Sanction", "abcd6"));
-        this.bookList.add(new Book("Bourne Deception", "abcd7"));
-        this.bookList.add(new Book("Bourne Objective", "abcd8"));
+        this.bookList.add(new Book("Bourne Identity", "abcd1","Robert Ludlum"));
+        this.bookList.add(new Book("Bourne Supremacy", "abcd2","Robert Ludlum"));
+        this.bookList.add(new Book("Bourne Ultimatum", "abcd3","Robert Ludlum"));
+        this.bookList.add(new Book("Bourne Legacy","abcd4","Eric Van Lustbader"));
+        this.bookList.add(new Book("Bourne Betrayal", "abcd5","Eric Van Lustbader"));
+        this.bookList.add(new Book("Bourne Sanction", "abcd6","Eric Van Lustbader"));
+        this.bookList.add(new Book("Bourne Deception", "abcd7","Eric Van Lustbader"));
+        this.bookList.add(new Book("Bourne Objective", "abcd8","Eric Van Lustbader"));
 
     }
 

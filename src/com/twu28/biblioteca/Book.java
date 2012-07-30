@@ -10,12 +10,14 @@ package com.twu28.biblioteca;
 public class Book {
     String title;
     String isbn;
+    String author;
     public boolean isAvailable;
 
-    Book(String name, String id)
+    Book(String name, String id, String author)
     {
         this.isbn = id;
         this.title = name;
+        this.author = author;
         this.isAvailable = true;      //Book is available by default when its created for the first time
     }
     public String getIsbn()
